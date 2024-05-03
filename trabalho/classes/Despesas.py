@@ -11,7 +11,6 @@ class Despesa(Gclass):
     att = ['_idcompra','_descricao','_data','_valorpp','_namigos','_usernameamigos','_valorcompra']
     header = 'Despesas'
     des = ['Idcompra','Descrição','Data','Valor por Pessoa','Número de Amigos','Username dos Amigos','Valor da Compra']
-    username = ""
     def __init__ (self, idcompra, descricao, data, usernameamigos, valorcompra=0,namigos=0):
         super().__init__()
         self._idcompra = idcompra
