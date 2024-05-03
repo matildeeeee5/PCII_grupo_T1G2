@@ -25,10 +25,6 @@ class Grupo(Gclass):
     def grupo_id(self):
         return self._grupo_id
 
-    @grupo_id.setter
-    def grupo_id(self, grupo_id):
-        self._grupo_id = grupo_id
-
     @property
     def nome(self):
         return self._nome
