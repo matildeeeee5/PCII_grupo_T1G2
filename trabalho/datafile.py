@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Jan 18 18:17:14 2024
+Created on Fri Apr 26 11:01:02 2024
 
-@author: acbrito
+@author: 35196
 """
+
 filename = 'data/'

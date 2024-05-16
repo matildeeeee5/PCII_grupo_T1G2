@@ -17,7 +17,7 @@ class User(Gclass):
         self._username = username
         self._nome= nome 
         self._email = email 
-        self._senha = str(senha) 
+        self._senha = self.set_password(senha) 
         self._ncartao = int(ncartao)
         self._dvc = datetime.date.fromisoformat(dvc) 
         self._cvc= int(cvc) 
@@ -53,8 +53,8 @@ class User(Gclass):
         self._senha= senha
 
     @classmethod
-    def chk_password(self, user, senha):
-        User.username = ''
+    def chk_password(cls, user, senha):
+        cls.username = ''
         if user in User.obj:
             obj = User.obj[user]
             valid = bcrypt.checkpw(senha.encode(), obj._senha.encode())

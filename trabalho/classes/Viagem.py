@@ -16,14 +16,14 @@ class Viagem(Gclass):
         self._idviagem = idviagem
         self._nome_viagem = str(nome_viagem)
         self._senha = senha
-        self._participantes = list(participantes.split(","))
+        self._participantes = participantes
         
         Viagem.obj[idviagem] = self
         Viagem.lst.append(idviagem)
         
     @property 
     def idviagem(self):
-        return self._viagem 
+        return self._idviagem 
     
     @property 
     def nome_viagem(self):
@@ -44,7 +44,7 @@ class Viagem(Gclass):
         return self._participantes 
     
     def adicionar_participantes(self,username):
-        self._participantes.append(username)
+        self._participantes = self._participantes + username
         return self._participantes 
     
     @classmethod

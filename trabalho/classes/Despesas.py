@@ -1,33 +1,27 @@
 from classes.Gclass import Gclass
 import datetime
-class Despesa(Gclass):
-    despesas = []
+class Despesas(Gclass):
+    Despesass = []
     obj = dict()
     lst = list()
     pos = 0
     sortkey = ''
     auto_number = 0
     nkey= 1
-    att = ['_idcompra','_descricao','_data','_valorpp','_namigos','_usernameamigos','_valorcompra']
+    att = ['_idcompra','_descrição','_data','_valorpp','_namigos','_valorcompra']
     header = 'Despesas'
-    des = ['Idcompra','Descrição','Data','Valor por Pessoa','Número de Amigos','Username dos Amigos','Valor da Compra']
-    def __init__ (self, idcompra, descricao, data, usernameamigos, valorcompra=0,namigos=0):
+    des = ['Idcompra','Descrição','Data','Valor por Pessoa','Número de Amigos','Valor da Compra']
+    def __init__ (self, idcompra, descricao, data, valorcompra=0,namigos=0):
         super().__init__()
         self._idcompra = idcompra
-        self._descricao= str(descricao)
+        self._descrição= str(descricao)
         self._data = datetime.date.fromisoformat(data)
         self._namigos = int(namigos)
-        self._usernameamigos = []
-        self.add_username(usernameamigos)
         self._valorcompra = float(valorcompra)
-        self._valorpp = float(valorcompra)/int(namigos)
+        self._valorpp = (float(valorcompra)/int(namigos)) if self._namigos > 0 else 0
         
-        Despesa.obj[idcompra] = self
-        Despesa.lst.append(idcompra)
-    
-    def add_username(self, namigos, username):
-        for x in range(namigos-1):
-            self._usernameamigos.append(username)
+        Despesas.obj[idcompra] = self
+        Despesas.lst.append(idcompra)
         
         
     @property
@@ -43,14 +37,6 @@ class Despesa(Gclass):
         return self._data 
     
     @property 
-    def usernameamigos(self):
-        return self._usernameamigos 
-    
-    @property 
-    def valorpp(self):
-        return self._valorpp 
-    
-    @property 
     def namigos(self):
         return self._namigos 
     
@@ -58,8 +44,9 @@ class Despesa(Gclass):
     def valorcompra(self):
         return self._valorcompra
     
-    @classmethod    
-    def adicionar_despesa(cls, idcompra, descricao, data, usernameamigos, valorcompra=0, namigos=0):
-        despesa = Despesa(idcompra, descricao, data, usernameamigos, valorcompra, namigos)
-        cls.despesas.append(despesa)
+    @classmethod
+    def adicionar_despesas(cls, idcompra, descricao, data, valorcompra=0, namigos=0):
+        despesa = Despesas(idcompra, descricao, data, valorcompra, namigos)
+        cls.Despesass.append(despesa)
         return despesa
+    

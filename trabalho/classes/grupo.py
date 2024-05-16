@@ -1,3 +1,4 @@
+import bcrypt
 from classes.Gclass import Gclass
 class Grupo(Gclass):
     obj = dict()
@@ -54,3 +55,22 @@ class Grupo(Gclass):
     @senha.setter
     def senha(self, senha):
         self._senha = senha
+        
+    @classmethod
+    def chk_password(self, user, senha):
+        Grupo.grupo_id = ''
+        if user in Grupo.obj:
+            obj = Grupo.obj[user]
+            valid = bcrypt.checkpw(senha.encode(), obj._senha.encode())
+            if valid:
+                Grupo.grupo_id = user
+                message = "Valid"
+            else:
+                message = 'Wrong password'
+        else:
+            message = 'No existent user'
+        return message
+    @classmethod
+    def set_password(self, password):
+        passencrypted = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
+        return passencrypted.decode()

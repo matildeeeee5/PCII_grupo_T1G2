@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Userlogin demo PCII</title>
+    <title>Customer order demo PCII</title>
     {% block title %}
     {% endblock %}
   </head>
@@ -14,8 +14,30 @@
                     <li><a class="button" href="/login">Login</a></li>
                 {% else %}
                     <li><a class="button" href="/logoff">Logoff</a></li>
-                    <li><a class="button" href="/Userlogin">Users</a></li>
+                    
+                    <li><a class="button" href="/submenu?subm=Viagem">Viagens</a></li>
+                     <li><a class="button" href="/submenu?subm=grupo">Grupos</a></li>
+                     
+                    
+                    <li><a class="button" href="/gform/Despesas">Despesa</a></li>
+                    
+                    
+                    
                     <li><a class="button" style="color:lightblue">User: {{ulogin}}</a></li>
+                    
+                    <br><br>
+                    
+                    {% if submenu == "Viagem" %}
+                        <li><a class="button" href="/gform/Viagem?option=''&subm=Viagem">Viagem form</a></li>
+                        <li><a class="button" href="/gformT/Viagem?option=''&subm=Viagem">Viagem tabela</a></li>
+                    {% endif %} 
+                    {% if submenu == "grupo" %}
+                        <li><a class="button" href="/gform/grupo?option=''&subm=grupo">Grupos form</a></li>
+                        <li><a class="button" href="/gformT/grupo?option=''&subm=grupo">Grupos tabela</a></li>
+                        
+                    {% endif %} 
+                    
+                    
                 {% endif %}
             </ul>
         </nav>

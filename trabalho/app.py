@@ -1,12 +1,35 @@
 from flask import Flask, render_template, request, session
 from datafile import filename
+
+import os
+
+from classes.Despesas import Despesas
+from classes.grupo import Grupo
 from classes.User import User
+from classes.Viagem import Viagem
 
 app = Flask(__name__)
 
-User.read(filename + 'business.db')
+Despesas.read(filename + 'user.db')
+Grupo.read(filename + 'user.db')
+User.read(filename + 'user.db')
+Viagem.read(filename + 'user.db')
 prev_option = ""
+submenu = ""
 app.secret_key = 'BAD_SECRET_KEY'
+
+upload_folder = os.path.join('static', 'images')
+app.config['UPLOAD'] = upload_folder
+
+
+import subs_login as lsub
+import subs_gform as gfsub
+import subs_gformT as gfTsub
+import subs_hform as gfhsub
+import subs_subform as gfsubsub
+import subs_productFoto as productFotosub
+import subs_filmes as filmessub
+
 
 @app.route("/")
 def index():
@@ -14,83 +37,66 @@ def index():
     
 @app.route("/login")
 def login():
-    return render_template("login.html", user= "", password="", ulogin=session.get("user"),resul = "")
+    return lsub.login()
 
 @app.route("/logoff")
 def logoff():
-    session.pop("user",None)
-    return render_template("index.html", ulogin=session.get("user"))
+    return lsub.logoff()
 
 @app.route("/chklogin", methods=["post","get"])
 def chklogin():
-    user = request.form["user"]
-    password = request.form["password"]
-    resul = User.chk_password(user, password)
-    if resul == "Valid":
-        session["user"] = user
-        return render_template("index.html", ulogin=session.get("user"))
-    return render_template("login.html", user=user, password = password, ulogin=session.get("user"),resul = resul)
+    return lsub.chklogin()
 
-@app.route("/Userlogin", methods=["post","get"])
-def userlogin():
-    global prev_option
-    ulogin=session.get("user")
-    if (ulogin != None):
-        group = User.obj[ulogin].usergroup
-        if group != "admin":
-            User.current(ulogin)
-        butshow = "enabled"
-        butedit = "disabled"
-        option = request.args.get("option")
-        if option == "edit":
-            butshow = "disabled"
-            butedit = "enabled"
-        elif option == "delete":
-            obj = User.current()
-            User.remove(obj.user)
-            if not User.previous():
-                User.first()
-        elif option == "insert":
-            butshow = "disabled"
-            butedit = "enabled"
-        elif option == 'cancel':
-            pass
-        elif prev_option == 'insert' and option == 'save':
-            obj = User(request.form["user"],request.form["usergroup"], \
-                            User.set_password(request.form["password"]))
-            User.insert(obj.user)
-            User.last()
-        elif prev_option == 'edit' and option == 'save':
-            obj = User.current()
-            if group == "admin":
-                obj.usergroup = request.form["usergroup"]
-            if request.form["password"] != "":
-                obj.password = User.set_password(request.form["password"])
-                print(obj.password)
-            User.update(obj.user)
-        elif option == "first":
-            User.first()
-        elif option == "previous":
-            User.previous()
-        elif option == "next":
-            User.nextrec()
-        elif option == "last":
-            User.last()
-        elif option == 'exit':
-            return render_template("index.html", ulogin=session.get("user"))
-        prev_option = option
-        obj = User.current()
-        if option == 'insert' or len(User.lst) == 0:
-            user = ""
-            usergroup = ""
-            password = ""
-        else:
-            user = obj.user
-            usergroup = obj.usergroup
-            password = ""
-        return render_template("userlogin.html", butshow=butshow, butedit=butedit, user=user,usergroup = usergroup,password=password, ulogin=session.get("user"), group=group)
-    else:
-        return render_template("index.html", ulogin=ulogin)
+@app.route("/submenu", methods=["post","get"])
+def getsubm():
+    global submenu
+    submenu = request.args.get("subm")
+    return render_template("index.html", ulogin=session.get("user"),submenu=submenu)
 
+@app.route("/gform/<cname>", methods=["post","get"])
+def gform(cname=''):
+    submenu = request.args.get("subm")
+    return gfsub.gform(cname,submenu)
+
+
+@app.route("/gformT/<cname>", methods=["post","get"])
+def gformT(cname=''):
+    submenu = request.args.get("subm")
+    return gfTsub.gformT(cname,submenu)
+
+@app.route("/hform/<cname>", methods=["post","get"])
+def hform(cname=''):
+    submenu = request.args.get("subm")
+    return gfhsub.hform(cname,submenu)
+
+
+        
+@app.route("/subform/<cname>", methods=["post","get"])
+def subform(cname=""):
+    submenu = request.args.get("subm")
+    return gfsubsub.subform(cname,submenu)
+
+
+@app.route("/productform", methods=["post","get"])
+def productFoto():
+    submenu = request.args.get("subm")
+    cname = 'Product'
+    return productFotosub.productFoto(app,cname,submenu)
+
+@app.route("/order/mapa", methods=["post","get"])
+def ordermapa():
+
+    return render_template("uc.html", ulogin=session.get("user"),submenu=submenu)
+
+
+@app.route("/filmes", methods=["post","get"])
+def filmesform(cname='Filmes'):
+    submenu = request.args.get("subm")
+    return filmessub.filmesform(cname,submenu)
+
+
+    
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
+    #app.run()
+    

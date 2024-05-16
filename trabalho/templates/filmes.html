@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
+{% endblock %}
+
+{% block content %}
+    <div class = "dados">
+        <img src="/static/images/{{cname}}.jpg" alt="{{cname}}" width="300" height="200">
+        <h1>{{header}}</h1>
+        <h2> Nova Form </h2>
+        <br>
+        <button id="edit" type="button" {{butshow}} onclick="window.location.href = '/filmes?option=edit'" class="button1">Edit</button>
+        <button id="delete" type="button" {{butshow}} onclick="window.location.href = '/filmes?option=delete'" class="button1">Delete</button>
+        <button id="insert" type="button" {{butshow}} onclick="window.location.href = '/filmes?option=insert'" class="button1">Insert</button>
+        <button id="save" type="submit" form="form" class = "button1" {{butedit}}>Save</button>
+        <button id="cancel" type="button" {{butedit}} onclick="window.location.href = '/filmes?option=cancel'" class="button1">Cancel</button>
+        <button id="exit" type="button" {{butshow}} onclick="window.location.href = '/filmes?option=exit'" class="button1">Exit</button>
+        <br><br>
+            <table>
+                <tr>
+                    <td>
+                    
+                        <form id="form" action="/filmes?option=save" method="post">
+                            {% for key in att %}
+                              <label for="{{key}}">{{des[loop.index-1]}}:</label>
+                              {% if loop.index == 1 and butedit == 'enabled' and auto_number == 1 %}
+                                  <input type="text" disabled id="{{key}}" name="{{key}}" value="{{obj[key]}}" size="30"/>
+                              {%else%} 
+                                  {% if loop.index == 3 %}
+                                  <select name="_tipo" id="_tipo" {{butedit}}  >
+                                  	{% for valor in Tipos.values() %}               
+                                  		<option value="{{valor.code}}"> {{valor.code}} - {{Tipos[valor.code].name}}</option>
+                                  	 {% endfor %}
+                                  	
+                                  	< <option value="{{obj['_tipo']}}" SELECTED>{{Tipos[obj['_tipo']].code}} - {{Tipos[obj['_tipo']].name}}</option>"
+                                  
+                                  </select> 
+                                  {%else%} 
+                                                   
+                                      <input type="text" {{butedit}} id="{{key}}" name="{{key}}" value="{{obj[key]}}" size="30"/>
+                                  {%endif%}
+                              {%endif%}
+                              <br><br>
+                            {% endfor %}
+                        </form>
+                    </td>
+                    <td>
+                    
+                    
+                     <iframe width="560" height="315" 
+                         src="{{obj['_link']}}"
+                         title="YouTube video player" frameborder="0" 
+                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                         referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                     
+                    </td>
+                    
+                    <td>
+                    teste combo
+                    
+                        <select name="_tipo" id="_tipo"  >
+                        	{% for valor in Tipos.values() %}               
+                        		<option value="{{valor.code}}"> {{valor.code}} - {{Tipos[valor.code].name}}</option>
+                        	 {% endfor %}
+                        	
+                        	
+                        
+                        </select> 
+
+
+                    
+                    </td>
+                </tr>
+           </table> 
+        <br>
+        <button id="first" type="button" {{butshow}} onclick="window.location.href = '/filmes?option=first'" class="button1">First</button>
+        <button id="previous" type="button" {{butshow}} onclick="window.location.href = '/filmes?option=previous'" class="button1">Previous</button>
+        <button id="next" type="button" {{butshow}} onclick="window.location.href = '/filmes?option=next'" class="button1">Next</button>
+        <button id="last" type="button" {{butshow}} onclick="window.location.href = '/filmes?option=last'" class="button1">Last</button>
+    </div>
+
+{% endblock %}
