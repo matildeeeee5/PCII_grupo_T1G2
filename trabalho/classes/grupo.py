@@ -11,11 +11,11 @@ class Grupo(Gclass):
     header = 'Grupo'
     des = ['ID do Grupo', 'Nome', 'Participantes', 'Total de Despesas', 'Senha']
 
-    def __init__(self, grupo_id, nome, senha=''):
+    def __init__(self, grupo_id, nome, participantes, senha=''):
         super().__init__()
         self._grupo_id = grupo_id
         self._nome = nome
-        self._participantes = []  
+        self._participantes = participantes  
         self._total_despesas = 0.0 
         self._senha = senha
 
@@ -37,9 +37,6 @@ class Grupo(Gclass):
     @property
     def participantes(self):
         return self._participantes
-
-    def adicionar_participante(self, participante):
-        self._participantes.append(participante)
 
     @property
     def total_despesas(self):
