@@ -10,7 +10,7 @@ print("objeto sem estar gravado ",obj)
 
 Viagem.insert(getattr(obj,Viagem.att[0]))
 
-obj = Viagem.from_string("j456;Viena;claro;marta,clara,sushi")
+obj = Viagem.from_string("j459;Madrid;corpo;martim,camilo,sara")
 Viagem.insert(getattr(obj,Viagem.att[0]))
 
 

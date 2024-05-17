@@ -18,7 +18,6 @@
         <br><br>
         <form id="form" action="/gform/{{cname}}?option=save" method="post">
             {% for key in att %}
-                {% if key != '_valorpp' %}
                     <label for="{{key}}">{{des[loop.index-1]}}:</label>
                     {% if loop.index == 1 and butedit == 'enabled' and auto_number == 1 %}
                         <input type="text" disabled id="{{key}}" name="{{key}}" value="{{obj[key]}}" size="30"/>
@@ -26,7 +25,6 @@
                         <input type="text" {{butedit}} id="{{key}}" name="{{key}}" value="{{obj[key]}}" size="30"/>
                     {% endif %}
                     <br><br>
-                {% endif %}
             {% endfor %}
         </form>
         <br>
@@ -36,4 +34,5 @@
         <button id="last" type="button" {{butshow}} onclick="window.location.href = '/gform/{{cname}}?option=last'" class="button1">Last</button>
     </div>
 {% endblock %}
+
 

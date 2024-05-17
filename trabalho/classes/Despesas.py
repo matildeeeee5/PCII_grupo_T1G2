@@ -8,9 +8,9 @@ class Despesas(Gclass):
     sortkey = ''
     auto_number = 0
     nkey= 1
-    att = ['_idcompra','_descrição','_data','_namigos','_valorcompra','_valorpp']
+    att = ['_idcompra','_descrição','_data','_valorcompra','_namigos','_valorpp']
     header = 'Despesas'
-    des = ['Idcompra','Descrição','Data','Número de Amigos','Valor da Compra','Valor por Pessoa']
+    des = ['Idcompra','Descrição','Data','Valor da Compra','Número de Amigos','Valor por Pessoa']
     def __init__ (self, idcompra, descricao, data, valorcompra=0, namigos=0, valorpp=0):
         super().__init__()
         self._idcompra = idcompra
@@ -18,7 +18,7 @@ class Despesas(Gclass):
         self._data = datetime.date.fromisoformat(data)
         self._namigos = int(namigos)
         self._valorcompra = float(valorcompra)
-        self._valorpp = (float(valorcompra)/int(namigos)) if self._namigos > 0 else 0
+        self._valorpp = round((float(valorcompra)/int(namigos)) if self._namigos > 0 else 0,2)
         
         Despesas.obj[idcompra] = self
         Despesas.lst.append(idcompra)
