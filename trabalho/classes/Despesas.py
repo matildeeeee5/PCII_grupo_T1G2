@@ -8,10 +8,10 @@ class Despesas(Gclass):
     sortkey = ''
     auto_number = 0
     nkey= 1
-    att = ['_idcompra','_descrição','_data','_valorpp','_namigos','_valorcompra']
+    att = ['_idcompra','_descrição','_data','_namigos','_valorcompra','_valorpp']
     header = 'Despesas'
-    des = ['Idcompra','Descrição','Data','Valor por Pessoa','Número de Amigos','Valor da Compra']
-    def __init__ (self, idcompra, descricao, data, valorcompra=0,namigos=0):
+    des = ['Idcompra','Descrição','Data','Número de Amigos','Valor da Compra','Valor por Pessoa']
+    def __init__ (self, idcompra, descricao, data, valorcompra=0, namigos=0, valorpp=0):
         super().__init__()
         self._idcompra = idcompra
         self._descrição= str(descricao)

@@ -4,7 +4,7 @@ from datafile import filename
 import os
 
 from classes.Despesas import Despesas
-from classes.grupo import Grupo
+from classes.Grupo import Grupo
 from classes.User import User
 from classes.Viagem import Viagem
 
