@@ -60,8 +60,8 @@ def gform(cname='', submenu=""):
         obj = cl.current()
         if obj:
             obj_dict = obj.__dict__
-            if hasattr(obj, '_valorpp'):  # Check if the attribute exists
-                obj_dict['_valorpp'] = obj._valorpp  # Add _valorpp to the dictionary
+            if hasattr(obj, '_valorpp'):  
+                obj_dict['_valorpp'] = obj._valorpp 
         else:
             obj_dict = {att: "" for att in cl.att}
         return render_template("gform.html", butshow=butshow, butedit=butedit,
