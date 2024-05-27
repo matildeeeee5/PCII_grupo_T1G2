@@ -1,5 +1,6 @@
 import bcrypt
 from classes.Gclass import Gclass
+from classes.Viagem import Viagem
 class Grupo(Gclass):
     obj = dict()
     lst = list()
@@ -7,20 +8,24 @@ class Grupo(Gclass):
     sortkey = ''
     auto_number = 0
     nkey= 1
-    att = ['_grupo_id', '_nome', '_participantes', '_total_despesas', '_senha']
+    att = ['_grupo_id', '_nome', '_participantes', '_total_despesas', '_senha','_viagemid']
     header = 'Grupo'
-    des = ['ID do Grupo', 'Nome', 'Participantes', 'Total de Despesas', 'Senha']
+    des = ['ID do Grupo', 'Nome', 'Participantes', 'Total de Despesas', 'Senha','Id da Viagem']
 
-    def __init__(self, grupo_id, nome, participantes, total_despesas, senha=''):
+    def __init__(self, grupo_id, nome, participantes, total_despesas, senha, viagemid):
         super().__init__()
-        self._grupo_id = grupo_id
-        self._nome = nome
-        self._participantes = participantes 
-        self._total_despesas = 0.0 
-        self._senha = senha
-
-        Grupo.obj[grupo_id] = self
-        Grupo.lst.append(grupo_id)
+        if str(viagemid) in Viagem.lst:
+            self._grupo_id = grupo_id
+            self._viagemid = viagemid
+            self._nome = nome
+            self._participantes = participantes 
+            self._total_despesas = 0.0
+            self._senha = senha
+    
+            Grupo.obj[grupo_id] = self
+            Grupo.lst.append(grupo_id)
+        else:
+            print('Essa viagem não existe!!')
 
     @property
     def grupo_id(self):
