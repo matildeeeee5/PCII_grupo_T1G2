@@ -6,7 +6,7 @@
 
 {% block content %}
     <div class="dados">
-        <img src="{{ url_for('static', filename='images/Despesa.jpg') }}" alt="Despesa" width="300" height="200">
+        <img src="/static/images/Despesas.jpg" alt="Despesas" width="300" height="200">
         <h1>{{ header }}</h1>
         <br>
         <button id="delete" type="button" {{ butshow }} onclick="window.location.href = '/despesa/Despesas?option=delete'" class="button1">Delete</button>

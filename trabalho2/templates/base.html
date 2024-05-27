@@ -22,7 +22,7 @@
                     
                     
                     
-                    <li><a class="button" style="color:lightblue">User: {{ulogin}}</a></li>
+                    <li><a class="button" style="color:lightblue">User: {{ulogin}} (Saldo: 0.0)</a></li>
                     
                     <br><br>
                     
@@ -31,8 +31,8 @@
                         <li><a class="button" href="/gformT/Viagem?option=''&subm=Viagem">Viagem tabela</a></li>
                     {% endif %} 
                     {% if submenu == "Grupo" %}
-                        <li><a class="button" href="/grupo/Grupo?option=''&subm=Grupo">Grupos form</a></li>
-                        <li><a class="button" href="/grupoT/Grupo?option=''&subm=Grupo">Grupos tabela</a></li>
+                        <li><a class="button" href="/grupo/Grupo?option=''&subm=Grupo">Adicionar Grupo</a></li>
+                        <li><a class="button" href="/grupoT/Grupo?option=''&subm=Grupo">Tabela de Grupos</a></li>
                         
                     {% endif %} 
                     {% if submenu == "Despesas" %}
