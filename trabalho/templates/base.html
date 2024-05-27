@@ -17,9 +17,8 @@
                     
                     <li><a class="button" href="/submenu?subm=Viagem">Viagens</a></li>
                      <li><a class="button" href="/submenu?subm=Grupo">Grupos</a></li>
+                    <li><a class="button" href="/submenu?subm=Despesas">Despesas</a></li>
                      
-                    
-                    <li><a class="button" href="/gform/Despesas">Despesa</a></li>
                     
                     
                     
@@ -35,6 +34,10 @@
                         <li><a class="button" href="/gform/Grupo?option=''&subm=Grupo">Grupos form</a></li>
                         <li><a class="button" href="/gformT/Grupo?option=''&subm=Grupo">Grupos tabela</a></li>
                         
+                    {% endif %} 
+                    {% if submenu == "Despesas" %}
+                        <li><a class="button" href="/gform/Despesas?option=''&subm=Despesas">Adicionar despesa</a></li>
+                        <li><a class="button" href="/gformT/Despesas?option=''&subm=Despesas">Tabela de Despesas</a></li>
                     {% endif %} 
                     
                     
