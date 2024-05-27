@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
+{% endblock %}
+
+{% block content %}
+    <div class="dados">
+        <img src="/static/images/Despesas.jpg" alt="Despesas" width="300" height="200">
+        <h1>{{ header }}</h1>
+
+        <table>
+            <tr>
+                {% for header in desl %}
+                    <th>{{ header }}</th>
+                {% endfor %}
+            </tr>
+            {% for ob in objl %}
+                <tr>
+                    {% for key in attl %}
+                        <td>{{ ob[key] }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

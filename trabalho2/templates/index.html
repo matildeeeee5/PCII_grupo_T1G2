@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="dados-container">
+        <div class="header">
+            <h1 class="title">Aplicação Divisão de Contas</h1>
+        </div>
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='images/inicio.jpg') }}" alt="inicio" class="main-image">
+        </div>
+    </div>
+{% endblock %}

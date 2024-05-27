@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
+{% endblock %}
+
+{% block content %}
+    <div class="dados">
+        <img src="{{ url_for('static', filename='images/Despesa.jpg') }}" alt="Despesa" width="300" height="200">
+        <h1>{{ header }}</h1>
+        <br>
+        <button id="edit" type="button" {{ butshow }} onclick="window.location.href = '/despesa/Despesas?option=edit'" class="button1">Edit</button>
+        <button id="delete" type="button" {{ butshow }} onclick="window.location.href = '/despesa/Despesas?option=delete'" class="button1">Delete</button>
+        <button id="insert" type="button" {{ butshow }} onclick="window.location.href = '/despesa/Despesas?option=insert'" class="button1">Insert</button>
+        <button id="save" type="submit" form="form" class="button1" {{ butedit }}>Save</button>
+        <button id="cancel" type="button" {{ butedit }} onclick="window.location.href = '/despesa/Despesas?option=cancel'" class="button1">Cancel</button>
+        <button id="exit" type="button" {{ butshow }} onclick="window.location.href = '/despesa/Despesas?option=exit'" class="button1">Exit</button>
+        <br><br>
+        <form id="form" action="/despesa/Despesas?option=save" method="post">
+            {% for key in att %}
+                <div style="margin-bottom: 5px; display: flex; align-items: center;">
+                    <label for="{{ key }}" style="width: 150px; text-align: right; margin-right: 10px;">{{ des[loop.index-1] }}:</label>
+                    {% if loop.index == 1 and butedit == 'enabled' and auto_number == 1 %}
+                        <input type="text" disabled id="{{ key }}" name="{{ key }}" value="{{ obj[key] }}" size="30"/>
+                    {% else %}
+                        <input type="text" {{ butedit }} id="{{ key }}" name="{{ key }}" value="{{ obj[key] }}" size="30"/>
+                    {% endif %}
+                    {% if key == '_idgrupo' and grupo_not_found %}
+                        <div class="error-message" style="color: red; margin-left: 10px;">
+                            Este grupo não existe.
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </form>
+        <br>
+        <button id="first" type="button" {{ butshow }} onclick="window.location.href = '/despesa/Despesas?option=first'" class="button1">First</button>
+        <button id="previous" type="button" {{ butshow }} onclick="window.location.href = '/despesa/Despesas?option=previous'" class="button1">Previous</button>
+        <button id="next" type="button" {{ butshow }} onclick="window.location.href = '/despesa/Despesas?option=next'" class="button1">Next</button>
+        <button id="last" type="button" {{ butshow }} onclick="window.location.href = '/despesa/Despesas?option=last'" class="button1">Last</button>
+    </div>
+{% endblock %}
