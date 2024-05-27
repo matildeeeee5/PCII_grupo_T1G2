@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Customer order demo PCII</title>
+    {% block title %}
+    {% endblock %}
+  </head>
+    <body>
+        <nav>
+            <ul class="menu">
+                {% if ulogin == None %}
+                    <li><a class="button" href="/login">Login</a></li>
+                {% else %}
+                    <li><a class="button" href="/logoff">Logoff</a></li>
+                    
+                    <li><a class="button" href="/submenu?subm=Viagem">Viagens</a></li>
+                     <li><a class="button" href="/submenu?subm=Grupo">Grupos</a></li>
+                    <li><a class="button" href="/submenu?subm=Despesas">Despesas</a></li>
+                     
+                    
+                    
+                    
+                    <li><a class="button" style="color:lightblue">User: {{ulogin}}</a></li>
+                    
+                    <br><br>
+                    
+                    {% if submenu == "Viagem" %}
+                        <li><a class="button" href="/gform/Viagem?option=''&subm=Viagem">Viagem form</a></li>
+                        <li><a class="button" href="/gformT/Viagem?option=''&subm=Viagem">Viagem tabela</a></li>
+                    {% endif %} 
+                    {% if submenu == "Grupo" %}
+                        <li><a class="button" href="/gform/Grupo?option=''&subm=Grupo">Grupos form</a></li>
+                        <li><a class="button" href="/gformT/Grupo?option=''&subm=Grupo">Grupos tabela</a></li>
+                        
+                    {% endif %} 
+                    {% if submenu == "Despesas" %}
+                        <li><a class="button" href="/gform/Despesas?option=''&subm=Despesas">Adicionar despesa</a></li>
+                        <li><a class="button" href="/gformT/Despesas?option=''&subm=Despesas">Tabela de Despesas</a></li>
+                    {% endif %} 
+                    
+                    
+                {% endif %}
+            </ul>
+        </nav>
+    {% block content %}
+    {% endblock %}
+  </body>
+</html>
