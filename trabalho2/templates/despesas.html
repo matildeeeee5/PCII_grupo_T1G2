@@ -9,7 +9,6 @@
         <img src="{{ url_for('static', filename='images/Despesa.jpg') }}" alt="Despesa" width="300" height="200">
         <h1>{{ header }}</h1>
         <br>
-        <button id="edit" type="button" {{ butshow }} onclick="window.location.href = '/despesa/Despesas?option=edit'" class="button1">Edit</button>
         <button id="delete" type="button" {{ butshow }} onclick="window.location.href = '/despesa/Despesas?option=delete'" class="button1">Delete</button>
         <button id="insert" type="button" {{ butshow }} onclick="window.location.href = '/despesa/Despesas?option=insert'" class="button1">Insert</button>
         <button id="save" type="submit" form="form" class="button1" {{ butedit }}>Save</button>
