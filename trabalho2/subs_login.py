@@ -6,13 +6,12 @@
 
 """""
 
-from flask import Flask, render_template, request, session
-
+from flask import Flask, render_template, request, session, redirect, url_for
 from classes.User import User
 
 
 def login():
-    return render_template("login.html", user= "", password="", ulogin=session.get("user"),resul = "")
+    return render_template("login.html", user= "",  password="", ulogin=session.get("user"),resul = "")
 
 def logoff():
     session.pop("user",None)
@@ -24,5 +23,6 @@ def chklogin():
     resul = User.chk_password(user, password)
     if resul == "Valid":
         session["user"] = user
-        return render_template("index.html", ulogin=session.get("user"))
+        return redirect(url_for('home'))
     return render_template("login.html", user=user, password = password, ulogin=session.get("user"),resul = resul)
+
