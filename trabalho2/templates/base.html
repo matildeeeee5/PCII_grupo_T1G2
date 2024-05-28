@@ -12,16 +12,14 @@
             <ul class="menu">
                 {% if ulogin == None %}
                     <li><a class="button" href="/login">Login</a></li>
+                    <li><a class="button" href="/register">Register</a></li>
                 {% else %}
                     <li><a class="button" href="/logoff">Logoff</a></li>
                     
                     <li><a class="button" href="/submenu?subm=Viagem">Viagens</a></li>
                      <li><a class="button" href="/submenu?subm=Grupo">Grupos</a></li>
                     <li><a class="button" href="/submenu?subm=Despesas">Despesas</a></li>
-                     
-                    
-                    
-                    
+               
                     <li><a class="button" style="color:lightblue">User: {{ulogin}} (Saldo: 0.0)</a></li>
                     
                     <br><br>
