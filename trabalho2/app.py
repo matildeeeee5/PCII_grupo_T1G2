@@ -30,22 +30,11 @@ import subs_despesa as despesasub
 import subs_despesaT as despesaTsub
 import subs_grupo as subgrupo
 import subs_grupoT as grupoTsub
+import subs_register as rsub
 
 @app.route("/")
 def index():
     return render_template("index.html", ulogin=session.get("user"))
-    
-@app.route("/login")
-def login():
-    return lsub.login()
-
-@app.route("/logoff")
-def logoff():
-    return lsub.logoff()
-
-@app.route("/chklogin", methods=["post","get"])
-def chklogin():
-    return lsub.chklogin()
 
 @app.route("/submenu", methods=["post","get"])
 def getsubm():
@@ -84,6 +73,27 @@ def despesa(cname=''):
 def grupo(cname=''):
     submenu = request.args.get("subm")
     return subgrupo.gform(cname, submenu)
+
+@app.route("/register")
+def register():
+    return rsub.register()
+
+@app.route("/chkregister", methods=["POST"])
+def chkregister():
+    return rsub.chkregister()
+
+@app.route("/login")
+def login():
+    return render_template("login.html", user="", password="", ulogin=session.get("user"), resul="")
+
+@app.route("/logoff")
+def logoff():
+    session.pop("user", None)
+    return render_template("index.html", ulogin=session.get("user"))
+
+@app.route("/chklogin", methods=["post","get"])
+def chklogin():
+    return lsub.chklogin()
 
    
 if __name__ == '__main__':
