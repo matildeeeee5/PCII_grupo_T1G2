@@ -23,6 +23,6 @@ def chklogin():
     resul = User.chk_password(user, password)
     if resul == "Valid":
         session["user"] = user
-        return redirect(url_for('home'))
+        return redirect(url_for('gform'))
     return render_template("login.html", user=user, password = password, ulogin=session.get("user"),resul = resul)
 
